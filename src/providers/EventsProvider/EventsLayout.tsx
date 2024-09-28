@@ -4,11 +4,8 @@ import { Await } from "react-router-dom";
 import { Suspense } from "react";
 import Map from "../../components/Map/Map";
 import Slider from "../../components/Slider/Slider";
-
-export interface Location {
-  lat: number;
-  lng: number;
-}
+import { MapProvider } from "../MapProvider/MapProvider";
+import { Location } from "../MapProvider/MapProvider";
 
 export const EventsLayout = () => {
   const outlet = useOutlet();
@@ -23,11 +20,13 @@ export const EventsLayout = () => {
         children={(geolocation: Location) => {
           return (
             <EventsProvider>
-              <Slider>
-                <h2>It works!</h2>
-              </Slider>
-              <Map geolocation={geolocation} />
-              {outlet}
+              <MapProvider>
+                <Slider>
+                  <h2>It works!</h2>
+                  {outlet}
+                </Slider>
+                <Map geolocation={geolocation} />
+              </MapProvider>
             </EventsProvider>
           );
         }}
