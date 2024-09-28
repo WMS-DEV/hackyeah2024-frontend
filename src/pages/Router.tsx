@@ -11,8 +11,22 @@ import { EventsLayout } from "../providers/EventsProvider/EventsLayout";
 import { getTokenInfo } from "../api/proxyApi";
 import Config from "./Config/Config";
 
+const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
+  new Promise((res, rej) => {
+    navigator.geolocation.getCurrentPosition((location) => {
+      res({
+        lat: location.coords.latitude,
+        lng: location.coords.longitude,
+      });
+      console.log("geolocation");
+      console.log(location);
+    }, rej);
+  });
+
 const getUserData = () => {
-  return getTokenInfo();
+  return {
+    userData: getTokenInfo(),
+  };
 };
 
 const router = createBrowserRouter(
@@ -27,8 +41,18 @@ const router = createBrowserRouter(
       errorElement={<Login />}
     >
       <Route path="/" element={<Login />} />
-      <Route path="/" element={<EventsLayout />}>
-        <Route path="/" element={<ProtectedLayout />}>
+
+      <Route path="/" element={<ProtectedLayout />}>
+        <Route
+          path="/"
+          element={<EventsLayout />}
+          loader={() => {
+            return defer({
+              geolocation: getUserLocation(),
+            });
+          }}
+          errorElement={<div>Error</div>}
+        >
           <Route path="/map" element={<Config />}></Route>
         </Route>
       </Route>
