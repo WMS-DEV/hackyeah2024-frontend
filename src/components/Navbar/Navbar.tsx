@@ -10,6 +10,7 @@ const NAVBAR_LINKS = [
 
 const Navbar = () => {
   const currentPage = useLocation().pathname;
+
   return (
     <nav className="navbar">
       <div className="navbar__links">
@@ -24,7 +25,11 @@ const Navbar = () => {
           </Link>
         ))}
       </div>
-      <Link className="navbar__link" to={"/"} onClick={logout}>
+      <Link
+        className="navbar__link"
+        to={"/"}
+        onClick={logout}
+      >
         Logout
       </Link>
     </nav>

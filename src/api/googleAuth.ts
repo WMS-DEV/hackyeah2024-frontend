@@ -19,6 +19,6 @@ export const navigateToGoogleAuth = () => {
     `&response_type=code` +
     `&scope=email` +
     `&access_type=offline` +
-    `& approval_prompt=force`;
+    `&approval_prompt=force`;
   window.location.href = url;
 };
