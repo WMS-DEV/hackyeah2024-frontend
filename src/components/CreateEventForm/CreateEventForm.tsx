@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './CreateEventForm.scss';
 import { Category, FormData, StringOption, TextInput, DropdownSelect, DateTimeField, NumberInput, CheckboxField } from "./components/FormCompontents";
-import { createEvent } from "../../api/backendApi";
+import { createEvent, getCategoryList } from "../../api/backendApi";
 
 interface CreateEventFormProps {
     latitude: number;
@@ -9,6 +9,15 @@ interface CreateEventFormProps {
 }
 
 const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, longitude = 19.99154 }) => {
+    useEffect(() => {
+        const fetchData = async () => {
+            const results = await getCategoryList();
+            setCategories(results.map((category) => ({ value: category.id, label: category.name })));
+        };
+
+        fetchData();
+    }, []);
+
     const [formData, setFormData] = useState<FormData>({
         eventName: "",
         categoryId: -1,
@@ -19,20 +28,16 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
         maxParticipants: 2,
         isPublic: true,
         invitedEmails: [],
-        requieredExperience: "",
+        requiredExperience: "",
         age: "",
         longitude: 0,
         latitude: 0,
     });
 
-    const categories: Array<Category> = [
-        { value: 1, label: "Category 1" },
-        { value: 2, label: "Category 2" },
-        { value: 3, label: "Category 3" },
-    ];
+    const [categories, setCategories] = useState<Category[]>([]);
 
     const cyclicOptions: Array<StringOption> = [
-        { value: "NONE", label: "None" },
+        { value: "NONE", label: "One time" },
         { value: "DAILY", label: "Daily" },
         { value: "WEEKLY", label: "Weekly" },
         { value: "MONTHLY", label: "Monthly" },
@@ -70,27 +75,33 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        const result = await createEvent({
-            name: formData.eventName,
-            categoryId: formData.categoryId,
-            description: formData.description,
-            creatorId: 1,
-            startTimestamp: Date.parse(formData.startTimestamp),
-            endTimestamp: Date.parse(formData.endTimestamp),
-            cyclic: formData.cyclic,
-            maxNumberOfParticipants: formData.maxParticipants,
-            invitedEmails: [],
-            isPublic: formData.isPublic,
-            requieredExperience: formData.requieredExperience,
-            age: formData.age,
-            latitude,
-            longitude,
-        });
+        try {
+            const result = await createEvent({
+                name: formData.eventName,
+                categoryId: formData.categoryId,
+                description: formData.description,
+                creatorId: 1,
+                startTime: Date.parse(formData.startTimestamp),
+                endTime: Date.parse(formData.endTimestamp),
+                cyclic: formData.cyclic,
+                maxNumberOfParticipants: formData.maxParticipants,
+                invitedEmails: [],
+                isPublic: formData.isPublic,
+                requiredExperience: formData.requiredExperience,
+                age: formData.age,
+                latitude,
+                longitude,
+            });
 
-        console.log('latitude', latitude);
-        console.log('longitude', longitude);
-        console.log("Form submitted:", formData);
-        console.log('Result:', result);
+            console.log('latitude', latitude);
+            console.log('longitude', longitude);
+            console.log("Form submitted:", formData);
+            console.log('Result:', result);
+        } catch (error) {
+            alert("Error creating event. Please check your data and try again.");
+        }
+
+
     };
 
     return (
@@ -115,6 +126,7 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
                 name="categoryId"
                 value={formData.categoryId}
                 options={categories}
+                label="Category"
                 handleInputChange={handleInputChange}
             />
 
@@ -138,6 +150,7 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
                 name="cyclic"
                 value={formData.cyclic}
                 options={cyclicOptions}
+                label="Cyclic"
                 handleInputChange={handleInputChange}
             />
 
@@ -154,13 +167,15 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
                 name="age"
                 value={formData.age}
                 options={ageOptions}
+                label="Age groups"
                 handleInputChange={handleInputChange}
             />
 
             <DropdownSelect
-                name="requieredExperience"
-                value={formData.requieredExperience}
+                name="requiredExperience"
+                value={formData.requiredExperience}
                 options={experienceOptions}
+                label="Experience"
                 handleInputChange={handleInputChange}
             />
 

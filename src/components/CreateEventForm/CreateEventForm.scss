@@ -2,7 +2,7 @@
 
 form {
     width: 80%;
-    margin: 25px auto;
+    // margin: 100px auto;
     overflow-y: scroll;
     margin: 0 auto;
     padding: 20px;
@@ -26,6 +26,7 @@ form {
     }
 
     input[type="text"],
+    input[type="number"],
     input[type="date"],
     input[type="time"],
     input[type="datetime-local"],
@@ -36,6 +37,10 @@ form {
         border: 1px solid $accent;
         border-radius: 12px;
         box-sizing: border-box;
+
+        :hover, :focus, :active {
+            border-color: $accent-light;
+        }
     }
 
     select {
@@ -116,4 +121,9 @@ form>h2 {
     text-align: left;
     margin-right: auto;
     margin-left: 0px;
+}
+
+form>button:hover {
+    background-color: transparent;
+    border-color: $accent;
 }

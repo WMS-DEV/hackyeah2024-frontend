@@ -10,7 +10,7 @@ export interface FormData {
     maxParticipants: number;
     isPublic: boolean;
     invitedEmails: Array<string>;
-    requieredExperience: string;
+    requiredExperience: string;
     age: string;
     longitude: number;
     latitude: number;
@@ -86,6 +86,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({
 export interface DropdownSelectProps<T> {
     name: string;
     value: T;
+    label: string;
     options: DropdownOption<T>[];
     handleInputChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
@@ -93,12 +94,13 @@ export interface DropdownSelectProps<T> {
 export const DropdownSelect = <T extends string | number>({
     name,
     value,
+    label = "",
     options,
     handleInputChange,
 }: DropdownSelectProps<T>) => {
     return (
-        <div className="select-wrapper">
-            <label htmlFor={name}>Dropdown/Autocomplete</label>
+        <div className="select-wrapper input-label">
+            <label htmlFor={name}>{label}</label>
             <select
                 className="custom-select"
                 id={name}
