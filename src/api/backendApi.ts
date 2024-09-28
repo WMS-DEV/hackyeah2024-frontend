@@ -12,19 +12,30 @@ export interface EventData {
     categoryId: number;
     creatorId: number;
     description: string;
-    startTimestamp: number;
-    endTimestamp: number;
+    startTime: number;
+    endTime: number;
     cyclic: string;
     maxNumberOfParticipants: number;
     invitedEmails: Array<string>;
     isPublic: boolean;
-    requieredExperience: string;
+    requiredExperience: string;
     age: string;
     longitude: number;
     latitude: number;
 }
 
 export const createEvent = async (eventData: EventData) => {
-    const response = await backendAxios.post("/events", JSON.stringify(eventData));
+    eventData.categoryId = Number(eventData.categoryId);
+    const response = await backendAxios.post("/api/v1/events", JSON.stringify(eventData));
     return response.data;
 }
+
+interface Category {
+    id: number;
+    name: string;
+}
+
+export const getCategoryList = async () => {
+    const response = await backendAxios.get("/api/v1/categories");
+    return response.data as Array<Category>;
+};
