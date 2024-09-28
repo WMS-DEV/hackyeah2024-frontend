@@ -1,10 +1,8 @@
 @import "@/variables.scss";
 
 form {
-    width: 80%;
-    margin: 25px auto;
+    background-color: $primary;
     overflow-y: scroll;
-    margin: 0 auto;
     padding: 20px;
     padding-top: 75px;
     border-radius: 8px;
@@ -15,6 +13,7 @@ form {
 
     div {
         margin-bottom: 15px;
+        background-color: $primary;
     }
 
     label {
@@ -23,9 +22,11 @@ form {
         font-weight: 500;
         margin-bottom: 5px;
         color: $secondary;
+        width: 100%;
     }
 
     input[type="text"],
+    input[type="number"],
     input[type="date"],
     input[type="time"],
     input[type="datetime-local"],
@@ -36,6 +37,11 @@ form {
         border: 1px solid $accent;
         border-radius: 12px;
         box-sizing: border-box;
+        background-color: transparent;
+
+        :hover, :focus, :active {
+            border-color: $accent-light;
+        }
     }
 
     select {
@@ -57,10 +63,6 @@ form {
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-
-        &:hover {
-            background-color: #0056b3;
-        }
     }
 }
 
@@ -101,4 +103,24 @@ form {
     margin-bottom: 15px;
     color: $secondary;
     width: 100%;
+}
+
+.submit-button {
+    background-color: transparent;
+    border: 1px solid $accent;
+    border-radius: 15px;
+}
+
+form>h2 {
+    color: white;
+    border-bottom: 5px solid $accent;
+    width: auto;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 0px;
+}
+
+form>button:hover {
+    background-color: transparent;
+    border-color: $accent;
 }
