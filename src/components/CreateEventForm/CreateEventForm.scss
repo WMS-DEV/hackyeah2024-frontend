@@ -37,6 +37,7 @@ form {
         border: 1px solid $accent;
         border-radius: 12px;
         box-sizing: border-box;
+        background-color: transparent;
 
         :hover, :focus, :active {
             border-color: $accent-light;
@@ -62,10 +63,6 @@ form {
         border-radius: 4px;
         cursor: pointer;
         transition: background-color 0.3s ease;
-
-        &:hover {
-            background-color: #0056b3;
-        }
     }
 }
 
