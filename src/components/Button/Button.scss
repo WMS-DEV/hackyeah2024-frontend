@@ -1,0 +1,37 @@
+@import '@/variables.scss';
+
+.nav-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 101;
+    cursor: pointer;
+
+    &__icon {
+        width: 46px;
+        height: 46px;
+        fill: $secondary;
+        &--active {
+            fill: $accent !important;
+        }
+    }
+
+    &__label {
+        font-size: 16px;
+        font-weight: 300;
+        margin: 0 1rem;
+        color: $secondary;
+        transition: color 0.3s;
+
+        &--active {
+            color: $accent;
+            font-weight: bold;
+        }
+
+        @media (max-width: $md) {
+            font-size: 1rem;
+        }
+    }
+}
