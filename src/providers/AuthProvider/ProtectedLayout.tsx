@@ -1,9 +1,7 @@
-import { useNavigate, useOutlet } from 'react-router-dom';
-import { useAuth } from './AuthProvider';
-import { useEffect } from 'react';
-import Navbar from '../../components/Navbar/Navbar';
-import './ProtectedLayout.scss';
-import Slider from '../../components/Slider/Slider';
+import { useNavigate, useOutlet } from "react-router-dom";
+import { useAuth } from "./AuthProvider";
+import { useEffect } from "react";
+import "./ProtectedLayout.scss";
 
 export const ProtectedLayout = () => {
     const { isTokenValid } = useAuth();
@@ -12,17 +10,9 @@ export const ProtectedLayout = () => {
 
     useEffect(() => {
         if (!isTokenValid()) {
-            navigate('/');
+            navigate("/");
         }
     }, [isTokenValid, navigate]);
 
-    return (
-        <div className="protected-layout">
-            <Navbar />
-            <Slider>
-                <h2>please works</h2>
-            </Slider>
-            {outlet}
-        </div>
-    );
+    return <div className="protected-layout">{outlet}</div>;
 };
