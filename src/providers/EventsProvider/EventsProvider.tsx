@@ -1,10 +1,7 @@
 import { ReactNode, createContext, useContext, useState } from "react";
-import { Poi } from "../../components/Map/Map";
+import { Location } from "../MapProvider/MapProvider";
 
-enum EventCategory {
-  SOCCER = "Soccer",
-  BASKETBALL = "Basketball",
-}
+export type EventCategory = "Soccer" | "Basketball" | "Volleyball";
 
 export interface EventInfo {
   id: string;
@@ -16,6 +13,16 @@ export interface EventInfo {
   category: EventCategory;
 }
 
+export interface LocationClickListener {
+  listener: (arg: Location) => void;
+  key: string;
+}
+
+export interface EventClickListener {
+  listener: (arg: EventInfo) => void;
+  key: string;
+}
+
 export interface EventsContext {
   events: EventInfo[];
   setEvents: (value: EventInfo[]) => void;
@@ -23,11 +30,19 @@ export interface EventsContext {
 
 export const EventsContext = createContext<EventsContext>({
   events: [],
-  setEvents: () => { },
+  setEvents: () => {},
 });
-const locations: Poi[] = [
+
+const locations: Array<{
+  key: string;
+  location: {
+    lat: number;
+    lng: number;
+  };
+}> = [
   { key: "operaHouse", location: { lat: -33.8567844, lng: 151.213108 } },
   { key: "tarongaZoo", location: { lat: -33.8472767, lng: 151.2188164 } },
+  { key: "poland", location: { lat: 52.402178, lng: 16.918659 } },
   { key: "manlyBeach", location: { lat: -33.8209738, lng: 151.2563253 } },
   { key: "hyderPark", location: { lat: -33.8690081, lng: 151.2052393 } },
   { key: "theRocks", location: { lat: -33.8587568, lng: 151.2058246 } },
@@ -45,16 +60,21 @@ const locations: Poi[] = [
 
 export const EventsProvider = (props: { children: ReactNode }) => {
   const [events, setEvents] = useState<EventInfo[]>(
-    locations.map((location: Poi) => ({
+    locations.map((location) => ({
       ...location,
       id: location.key,
-      category: EventCategory.SOCCER,
+      category: "Soccer",
       name: "My name",
     })),
   );
 
   return (
-    <EventsContext.Provider value={{ events, setEvents }}>
+    <EventsContext.Provider
+      value={{
+        events,
+        setEvents,
+      }}
+    >
       {props.children}
     </EventsContext.Provider>
   );
