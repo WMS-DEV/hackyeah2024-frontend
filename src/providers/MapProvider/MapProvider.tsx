@@ -57,6 +57,7 @@ export const MapProvider = (props: { children: ReactNode }) => {
     useState<Location | null>(null);
 
   const addEventClickListener = (listener: EventClickListener) => {
+    console.log("Added listener");
     setEventClickListeners((listeners) => [...listeners, listener]);
   };
 

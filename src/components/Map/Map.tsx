@@ -23,6 +23,7 @@ const EventsMap = (props: { geolocation: Location }) => {
   } = useMap();
 
   const handleLocationClick = (event: MapMouseEvent) => {
+    console.log(event);
     if (event.detail.latLng) {
       setLastClickedLocation(event.detail.latLng);
       locationClickListeners.forEach((listener) => {
@@ -32,6 +33,7 @@ const EventsMap = (props: { geolocation: Location }) => {
   };
 
   const handleEventClick = (event: EventInfo) => {
+    console.log(event);
     if (event) {
       setLastClickedLocation(event.location);
       eventClickListeners.forEach((listener) => {

@@ -1,4 +1,4 @@
-@import '@/variables.scss';
+@import "@/variables.scss";
 
 .slider {
     position: fixed;
@@ -22,9 +22,9 @@
         background-color: $primary;
         position: relative;
         border-radius: 20px;
+        cursor: pointer;
 
-        @media screen and (max-width: $md) {
-        }
+        @media screen and (max-width: $md) {}
     }
 
     &__content {

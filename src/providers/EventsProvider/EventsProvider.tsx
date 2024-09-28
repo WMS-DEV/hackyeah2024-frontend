@@ -64,7 +64,7 @@ export const EventsProvider = (props: { children: ReactNode }) => {
       ...location,
       id: location.key,
       category: "Soccer",
-      name: "My name",
+      name: "Event name",
     })),
   );
 
