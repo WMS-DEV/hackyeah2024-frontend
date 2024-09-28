@@ -102,3 +102,18 @@ form {
     color: $secondary;
     width: 100%;
 }
+
+.submit-button {
+    background-color: transparent;
+    border: 1px solid $accent;
+    border-radius: 15px;
+}
+
+form>h2 {
+    color: white;
+    border-bottom: 5px solid $accent;
+    width: 50%;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 0px;
+}
