@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import './slider.style.scss';
 import { AnimatePresence, motion } from 'framer-motion';
+import Navbar from '../Navbar/Navbar';
 
 const sliderVariants = {
     desctop: {
@@ -41,9 +42,16 @@ type SliderProps = {
     children: React.ReactNode;
 };
 
+const contentVariants = {
+    hidden: { height: 0, opacity: 0 },
+    visible: { height: '60vh', opacity: 1 },
+    exit: { height: 0, opacity: 0 },
+};
+
 const Slider: FC<SliderProps> = ({ children }) => {
     const [isVisible, setIsVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(isMobileDevice());
+    const [isContentVisible, setIsContentVisible] = useState(true);
 
     useEffect(() => {
         const timer = setTimeout(() => {
@@ -63,7 +71,7 @@ const Slider: FC<SliderProps> = ({ children }) => {
     }, []);
 
     const handleClose = () => {
-        setIsVisible(false);
+        setIsContentVisible(!isContentVisible);
     };
 
     return (
@@ -80,13 +88,23 @@ const Slider: FC<SliderProps> = ({ children }) => {
                     exit={isMobile ? sliderVariants.mobile.exit : sliderVariants.desctop.exit}
                     transition={{ duration: 0.5 }}
                 >
-                    <div className="slider__content">
-                        {isMobile && (
-                            <button className="slider__close-button" onClick={handleClose}>
-                                &times;
-                            </button>
-                        )}
-                        {children}
+                    <div className="slider__wrapper">
+                        {isMobile && <div className="slider__close-button" onClick={handleClose} />}
+                        <AnimatePresence>
+                            {isContentVisible && (
+                                <motion.div
+                                    className="slider__content"
+                                    initial="hidden"
+                                    animate="visible"
+                                    exit="exit"
+                                    variants={contentVariants}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    {children}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                        <Navbar />
                     </div>
                 </motion.div>
             )}
