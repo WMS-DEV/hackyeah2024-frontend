@@ -9,8 +9,8 @@ export const backendAxios = axios.create({
 
 export interface EventData {
     name: string;
-    categoryId: int;
-    creatorId: int;
+    categoryId: number;
+    creatorId: number;
     description: string;
     startTimestamp: number;
     endTimestamp: number;
