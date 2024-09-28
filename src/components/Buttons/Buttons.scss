@@ -1,0 +1,14 @@
+@import "@/variables.scss";
+
+.buttonIconsContainer{
+    background-color: $primary;
+    display: flex;
+}
+
+.buttonIcons{
+    cursor: 'pointer';
+    color: $secondary;
+    background-color: transparent;
+}
+
+
