@@ -47,7 +47,7 @@ const EventsMap = (props: { geolocation: Location }) => {
           mapId="defaultMap"
           style={{ width: "100vw", height: "100vh" }}
           defaultCenter={props.geolocation}
-          defaultZoom={12}
+          defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
           colorScheme={ColorScheme.DARK}
@@ -69,7 +69,5 @@ const EventsMap = (props: { geolocation: Location }) => {
     </div>
   );
 };
-
-// <EventMarkers events={events} onClicks={handleEventClick} />
 
 export default EventsMap;
