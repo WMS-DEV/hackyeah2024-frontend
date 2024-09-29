@@ -8,7 +8,6 @@ import {
     DropdownSelect,
     DateTimeField,
     NumberInput,
-    CheckboxField,
     TextArea,
     InfoInput,
 } from './components/FormCompontents';
