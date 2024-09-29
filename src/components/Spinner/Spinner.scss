@@ -8,6 +8,10 @@
   background-position: center;
   margin: 0 auto;
   animation: spin 2s infinite ease-in-out, changeImage 6s infinite;
+
+  @media (min-width: $md) {
+    background-size: 15%;
+  }
 }
 
 @keyframes spin {
