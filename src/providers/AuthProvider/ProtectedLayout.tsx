@@ -4,15 +4,15 @@ import { useEffect } from "react";
 import "./ProtectedLayout.scss";
 
 export const ProtectedLayout = () => {
-    const { isTokenValid } = useAuth();
-    const outlet = useOutlet();
-    const navigate = useNavigate();
+  const { isTokenValid } = useAuth();
+  const outlet = useOutlet();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isTokenValid()) {
-            navigate("/");
-        }
-    }, [isTokenValid, navigate]);
+  useEffect(() => {
+    if (!isTokenValid()) {
+      navigate("/home");
+    }
+  }, [isTokenValid, navigate]);
 
-    return <div className="protected-layout">{outlet}</div>;
+  return <div className="protected-layout">{outlet}</div>;
 };
