@@ -3,7 +3,7 @@ import { EventProps } from '../../types/eventType';
 import './EventCard.style.scss';
 
 const EventCard: FC<EventProps> = (props) => {
-    const { name, startTime, endTime, category, createdBy } = props;
+    const { name, startTime, endTime, createdBy } = props;
 
     const formatTime = (timestamp: number) => {
         const date = new Date(timestamp);
