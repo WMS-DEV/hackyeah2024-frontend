@@ -1,7 +1,9 @@
 import axios from "axios";
 
+const BACKEND_URL = "https://hackyeah2024-backend.wmsdev.pl";
+
 export const backendAxios = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
+  baseURL: BACKEND_URL,
   headers: {
     "Content-Type": "application/json",
   },
