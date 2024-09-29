@@ -6,6 +6,7 @@ import { TextInfoBox, AccentTextInfoBox } from "./TextInfoBox";
 import "./Home.scss";
 import { getUserId, joinEvent } from "../../api/backendApi";
 import { useLocation, useNavigate } from "react-router-dom";
+import PointerIcon from "../../assets/icon_map_pointer.png";
 
 const Home = () => {
   const { addEventClickListener, removeEventClickListener, selectedEvent } =
@@ -43,7 +44,14 @@ const Home = () => {
 
   if (!event) {
     return (
-      <div className="home__empty"> Pick an event to view its details </div>
+      <div className="home__empty">
+        <div className="home__empty__title">
+          Pick an event to view its details
+        </div>
+        <div className="home__empty__pointer">
+          <img src={PointerIcon} width="100px" />
+        </div>
+      </div>
     );
   }
 

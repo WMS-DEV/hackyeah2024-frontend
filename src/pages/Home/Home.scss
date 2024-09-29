@@ -10,13 +10,27 @@
 
   &__empty {
     width: 100%;
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.8rem;
-    color: white;
+    height: 60%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
 
-    @media (min-width: $md) {
-      font-size: 1.3rem;
+    &__title {
+      width: 100%;
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.8rem;
+      color: white;
+
+      @media (max-width: $md) {
+        font-size: 1.5rem;
+      }
+    }
+
+    &__pointer {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
   }
 
