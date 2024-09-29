@@ -1,26 +1,21 @@
 import { useEffect, useState } from "react";
 import { useMap } from "../../providers/MapProvider/MapProvider";
-import {
-  EventInfo,
-  useEvents,
-} from "../../providers/EventsProvider/EventsProvider";
+import { EventInfo } from "../../providers/EventsProvider/EventsProvider";
 import { useSlider } from "../../providers/SliderProvider/SliderProvider";
 import { TextInfoBox, AccentTextInfoBox } from "./TextInfoBox";
 import "./Home.scss";
 import { joinEvent } from "../../api/backendApi";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const Home = () => {
-  const { addEventClickListener, removeEventClickListener } = useMap();
+  const { addEventClickListener, removeEventClickListener, selectedEvent } =
+    useMap();
   const [event, setEvent] = useState<EventInfo | null>(null);
   const { setVisibility } = useSlider();
-  const { events } = useEvents();
   const location = useLocation();
 
-  const [searchParams] = useSearchParams();
-
   useEffect(() => {
-    setVisibility(false);
+    setVisibility(true);
   }, [location]);
 
   useEffect(() => {
@@ -29,13 +24,9 @@ const Home = () => {
       setVisibility(true);
     };
 
-    const eventId = searchParams.get("eventId");
-    if (eventId) {
-      const eventsById = events.find(({ id }) => id === parseInt(eventId));
-      if (eventsById) {
-        setEvent({ ...eventsById });
-        setVisibility(true);
-      }
+    if (selectedEvent) {
+      setEvent({ ...selectedEvent });
+      setVisibility(true);
     }
 
     addEventClickListener({

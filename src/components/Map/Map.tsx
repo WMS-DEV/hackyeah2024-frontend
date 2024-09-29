@@ -16,11 +16,8 @@ const API_KEY = import.meta.env.VITE_MAPS_API_KEY;
 
 const EventsMap = (props: { geolocation: Location }) => {
   const { events } = useEvents();
-  const {
-    locationClickListeners,
-    eventClickListeners,
-    setLastClickedEventLocation,
-  } = useMap();
+  const { locationClickListeners, eventClickListeners, selectedEvent } =
+    useMap();
 
   const handleLocationClick = (event: MapMouseEvent) => {
     if (event.detail.latLng) {
@@ -32,7 +29,6 @@ const EventsMap = (props: { geolocation: Location }) => {
 
   const handleEventClick = (event: EventInfo) => {
     if (event) {
-      setLastClickedEventLocation(event.location);
       eventClickListeners.forEach((listener) => {
         listener.listener(event);
       });
@@ -45,7 +41,9 @@ const EventsMap = (props: { geolocation: Location }) => {
         <Map
           mapId="defaultMap"
           style={{ width: "100vw", height: "100vh" }}
-          defaultCenter={props.geolocation}
+          defaultCenter={
+            selectedEvent ? selectedEvent.location : props.geolocation
+          }
           defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}

@@ -12,14 +12,16 @@ import { getEvents } from "../../api/backendApi";
 const IncomingEvents = () => {
   const [events, setEvents] = useState<EventProps[]>([]);
   const [loading, setLoading] = useState(true);
-  const { addEventClickListener, removeEventClickListener } = useMap();
+  const { addEventClickListener, removeEventClickListener, setSelectedEvent } =
+    useMap();
   const navigate = useNavigate();
   const { setVisibility } = useSlider();
 
   useEffect(() => {
     setVisibility(true);
     const handleSelectedEvent = (event: EventInfo) => {
-      navigate(`/home?eventId=${event.id}`);
+      setSelectedEvent({ ...event });
+      navigate(`/home`);
     };
 
     addEventClickListener({
