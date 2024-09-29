@@ -1,6 +1,26 @@
 import { FC } from 'react';
 import { EventProps } from '../../types/eventType';
+import VolleyballIcon from '../../assets/icon_volleyball.png';
+import BasketballIcon from '../../assets/icon_basketball.png';
+import SoccerIcon from '../../assets/icon_soccer.png';
+import BaseballIcon from '../../assets/icon_baseball.png';
+import FootballIcon from '../../assets/icon_football.png';
+import TennisIcon from '../../assets/icon_table_tennis.png';
+import GolfIcon from '../../assets/icon_golf.png';
+import GymIcon from '../../assets/icon_gym.png';
+
 import './EventCard.style.scss';
+
+const eventCategoryToIcon: { [key: string]: string } = {
+    Volleyball: VolleyballIcon,
+    Basketball: BasketballIcon,
+    Soccer: SoccerIcon,
+    Baseball: BaseballIcon,
+    Football: FootballIcon,
+    Tennis: TennisIcon,
+    Golf: GolfIcon,
+    Gym: GymIcon,
+};
 
 const EventCard: FC<EventProps> = (props) => {
     const { name, startTime, endTime, createdBy } = props;
@@ -9,6 +29,8 @@ const EventCard: FC<EventProps> = (props) => {
         const date = new Date(timestamp);
         return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     };
+
+    const categoryIcon = eventCategoryToIcon[category.name] || eventCategoryToIcon.Gym;
 
     return (
         <div className="event-card">
@@ -27,6 +49,14 @@ const EventCard: FC<EventProps> = (props) => {
                             <p>End time</p>
                             <span>{formatTime(endTime)}</span>
                         </div>
+                    </div>
+
+                    <div className="event-card__category">
+                        <img
+                            src={categoryIcon}
+                            alt={category.name}
+                            className="event-card__category--icon"
+                        />
                     </div>
                 </div>
             </div>

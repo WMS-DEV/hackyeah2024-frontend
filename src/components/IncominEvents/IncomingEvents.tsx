@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import EventCard from '../EventCard/EventCard';
 import { EventProps } from '../../types/eventType';
 import './IncomingEvents.style.scss';
+import Loader from '../Loader/Loader';
 
 const eventAxios = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -13,6 +14,7 @@ const eventAxios = axios.create({
 
 const IncomingEvents = () => {
     const [events, setEvents] = useState<EventProps[]>([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -21,11 +23,17 @@ const IncomingEvents = () => {
                 setEvents(response.data);
             } catch (error) {
                 console.error('Error fetching events:', error);
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchEvents();
     }, []);
+
+    if (loading) {
+        return <Loader />;
+    }
 
     return (
         <div className="events">
@@ -35,10 +43,10 @@ const IncomingEvents = () => {
                     <div className="events__header--style" />
                 </div>
                 <div className="events__content">
-                    {events.length > 0 ? (
-                        events.map((event) => <EventCard {...event} key={event.id} />)
-                    ) : (
+                    {events.length === 0 ? (
                         <p>No events found</p>
+                    ) : (
+                        events.map((event) => <EventCard key={event.id} {...event} />)
                     )}
                 </div>
             </div>
