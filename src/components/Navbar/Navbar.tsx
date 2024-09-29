@@ -59,12 +59,12 @@ const Navbar = () => {
           <Button
             to="/profile"
             label="Profile"
-            isActive={currentPage === "/profile"}
+            isActive={currentPage.startsWith("/profile")}
             onClick={() => handleNavButtonClick("/profile")}
           >
             <AccountIcon
               className={`nav-button__icon ${
-                currentPage === "/profile" ? "nav-button__icon--active" : ""
+                currentPage.startsWith("/profile") ? "nav-button__icon--active" : ""
               }`}
             />
           </Button>

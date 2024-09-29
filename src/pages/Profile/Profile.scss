@@ -6,3 +6,17 @@
     margin: 50px auto;
     border-color: $accent;
 }
+
+.achievements-button {
+    height: 50px;
+    width: 150px;
+    margin: 15px auto;
+    border-color: $accent;
+}
+
+.buttons-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 50px;
+}
