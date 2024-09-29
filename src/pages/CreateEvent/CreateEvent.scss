@@ -1,0 +1,13 @@
+@import "@/variables.scss";
+
+.waiting-text {
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.8rem;
+    color: white;
+
+    @media (min-width: $md) {
+        font-size: 1.3rem;
+    }
+}

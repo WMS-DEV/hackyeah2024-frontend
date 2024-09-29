@@ -1,15 +1,12 @@
-import {
-  Route,
-  createBrowserRouter,
-  createRoutesFromElements,
-  defer,
-} from "react-router-dom";
-import Login from "./Login/Login";
-import { ProtectedLayout } from "../providers/AuthProvider/ProtectedLayout";
-import { AuthLayout } from "../providers/AuthProvider/AuthLayout";
-import { EventsLayout } from "../providers/EventsProvider/EventsLayout";
-import { getTokenInfo } from "../api/proxyApi";
-import Config from "./Config/Config";
+import { Route, createBrowserRouter, createRoutesFromElements, defer } from 'react-router-dom';
+import Login from './Login/Login';
+import { ProtectedLayout } from '../providers/AuthProvider/ProtectedLayout';
+import { AuthLayout } from '../providers/AuthProvider/AuthLayout';
+import { EventsLayout } from '../providers/EventsProvider/EventsLayout';
+import { getTokenInfo } from '../api/proxyApi';
+import IncomingEvents from '../components/IncominEvents/IncomingEvents';
+import CreateEvent from './CreateEvent/CreateEvent';
+import Profile from './Profile/Profile';
 
 const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
   new Promise((res, rej) => {
@@ -18,7 +15,7 @@ const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
         lat: location.coords.latitude,
         lng: location.coords.longitude,
       });
-      console.log("geolocation");
+      console.log('geolocation');
       console.log(location);
     }, rej);
   });
@@ -53,11 +50,13 @@ const router = createBrowserRouter(
           }}
           errorElement={<div>Error</div>}
         >
-          <Route path="/map" element={<Config />}></Route>
+          <Route path="/map" element={<IncomingEvents />}></Route>
+          <Route path="/create" element={<CreateEvent />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Route>
       </Route>
-    </Route>,
-  ),
+    </Route>
+  )
 );
 
 export default router;

@@ -2,13 +2,20 @@ import React, { useState, useEffect } from "react";
 import './CreateEventForm.scss';
 import { Category, FormData, StringOption, TextInput, DropdownSelect, DateTimeField, NumberInput, CheckboxField } from "./components/FormCompontents";
 import { createEvent, getCategoryList } from "../../api/backendApi";
+import { useNavigate } from "react-router-dom";
+
+type LatLng = {
+    lat: number;
+    lng: number;
+};
 
 interface CreateEventFormProps {
-    latitude: number;
-    longitude: number;
+    location: LatLng;
 }
 
-const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, longitude = 19.99154 }) => {
+const CreateEventForm: React.FC<CreateEventFormProps> = ({ location }) => {
+    const navigate = useNavigate();
+
     useEffect(() => {
         const fetchData = async () => {
             const results = await getCategoryList();
@@ -89,18 +96,20 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ latitude = 50.06772, 
                 isPublic: formData.isPublic,
                 requiredExperience: formData.requiredExperience,
                 age: formData.age,
-                latitude,
-                longitude,
+                latitude: location.lat,
+                longitude: location.lng,
             });
 
-            console.log('latitude', latitude);
-            console.log('longitude', longitude);
+            console.log('latitude', location.lat);
+            console.log('longitude', location.lng);
             console.log("Form submitted:", formData);
             console.log('Result:', result);
         } catch (error) {
             alert("Error creating event. Please check your data and try again.");
         }
 
+        alert("Event created successfully!");
+        navigate('/');
 
     };
 

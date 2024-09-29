@@ -28,9 +28,8 @@ const Navbar = () => {
                         isActive={currentPage === '/map'}
                     >
                         <MapIcon
-                            className={`nav-button__icon ${
-                                currentPage === '/map' ? 'nav-button__icon--active' : ''
-                            }`}
+                            className={`nav-button__icon ${currentPage === '/map' ? 'nav-button__icon--active' : ''
+                                }`}
                         />
                     </Button>
                     <Button
@@ -40,9 +39,8 @@ const Navbar = () => {
                         onClick={() => handleNavButtonClick('/create')}
                     >
                         <AddIcon
-                            className={`nav-button__icon ${
-                                currentPage === '/create' ? 'nav-button__icon--active' : ''
-                            }`}
+                            className={`nav-button__icon ${currentPage === '/create' ? 'nav-button__icon--active' : ''
+                                }`}
                         />
                     </Button>
                     <Button
@@ -52,16 +50,19 @@ const Navbar = () => {
                         onClick={() => handleNavButtonClick('/calendar')}
                     >
                         <CalendarIcon
-                            className={`nav-button__icon ${
-                                currentPage === '/calendar' ? 'nav-button__icon--active' : ''
-                            }`}
+                            className={`nav-button__icon ${currentPage === '/calendar' ? 'nav-button__icon--active' : ''
+                                }`}
                         />
                     </Button>
-                    <Button to="/profile" label="Profile" isActive={currentPage === '/profile'}>
+                    <Button
+                        to="/profile"
+                        label="Profile"
+                        isActive={currentPage === '/profile'}
+                        onClick={() => handleNavButtonClick('/profile')}
+                    >
                         <AccountIcon
-                            className={`nav-button__icon ${
-                                currentPage === '/profile' ? 'nav-button__icon--active' : ''
-                            }`}
+                            className={`nav-button__icon ${currentPage === '/profile' ? 'nav-button__icon--active' : ''
+                                }`}
                         />
                     </Button>
                 </div>
