@@ -28,9 +28,9 @@ const useLogin = () => {
     // if (isTokenValid()) {
     //   navigate("/map");
     // }
-    if (localStorage.getItem('isAuthenticated') === 'true') {
+    if (localStorage.getItem("isAuthenticated") === "true") {
       setAuthenticationInfo({ email: "sample@sample.com", expires: 15 });
-      navigate('/map');
+      navigate("/home");
     }
   }, [code, setAuthenticationInfo, navigate, isTokenValid]);
 
