@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import EventCard from "../EventCard/EventCard";
 import { EventProps } from "../../types/eventType";
@@ -8,13 +7,7 @@ import { useMap } from "../../providers/MapProvider/MapProvider";
 import { useNavigate } from "react-router-dom";
 import { EventInfo } from "../../providers/EventsProvider/EventsProvider";
 import { useSlider } from "../../providers/SliderProvider/SliderProvider";
-
-const eventAxios = axios.create({
-  baseURL: import.meta.env.VITE_BACKEND_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+import { getEvents } from "../../api/backendApi";
 
 const IncomingEvents = () => {
   const [events, setEvents] = useState<EventProps[]>([]);
@@ -42,8 +35,8 @@ const IncomingEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const response = await eventAxios.get("/api/v1/events");
-        setEvents(response.data);
+        const events = await getEvents();
+        setEvents(events);
         setLoading(false);
       } catch (error) {
         console.error("Error fetching events:", error);
