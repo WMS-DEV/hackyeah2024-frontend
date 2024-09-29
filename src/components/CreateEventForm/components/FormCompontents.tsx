@@ -29,10 +29,11 @@ export interface TextInputProps {
     label: string;
     name: keyof FormData;
     formData: FormData;
+    placeholder?: string;
     handleInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const TextInput: React.FC<TextInputProps> = ({ label, name, formData, handleInputChange }) => {
+export const TextInput: React.FC<TextInputProps> = ({ label, name, placeholder = 'Casual football match', formData, handleInputChange }) => {
     return (
         <div className="input-label">
             <label htmlFor={name}>{label}</label>
@@ -42,7 +43,7 @@ export const TextInput: React.FC<TextInputProps> = ({ label, name, formData, han
                 name={name}
                 value={formData[name] as string}
                 onChange={handleInputChange}
-                placeholder="Casual football match"
+                placeholder={placeholder}
             />
         </div>
     );
@@ -55,6 +56,7 @@ export interface NumberInputProps {
     placeholder?: string;
     min?: number;
     max?: number;
+    label?: string;
 }
 
 export const NumberInput: React.FC<NumberInputProps> = ({
@@ -64,10 +66,11 @@ export const NumberInput: React.FC<NumberInputProps> = ({
     placeholder = "Enter a number",
     min,
     max,
+    label = ""
 }) => {
     return (
         <div className="input-label" style={{ marginTop: '15px' }}>
-            <label htmlFor={name}>{name}</label>
+            <label htmlFor={name}>{label}</label>
             <input
                 type="number"
                 id={name}

@@ -50,12 +50,12 @@ const Achievements = () => {
     return <div className="container">
         {achievements.map((achievement) => (
             <div key={achievement.id} className="achievement">
-                <div>
+                <div className='achievement-headline'>
                     <p className='title'>{achievement.name}</p>
                     <p className='icon'>{achievement.icon}</p>
                     <p className='description'>{achievement.description}</p>
                 </div>
-                <div className='bottom'>
+                <div className='bottom achievement-footer'>
                     <div className='progress-container'>
                         <div className='progress-bar' style={{ width: `${100 * achievement.points / achievement.neededPoints}%` }}>
                         </div>

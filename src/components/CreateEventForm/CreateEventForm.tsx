@@ -8,7 +8,6 @@ import {
   DropdownSelect,
   DateTimeField,
   NumberInput,
-  CheckboxField,
 } from "./components/FormCompontents";
 import { createEvent, getCategoryList } from "../../api/backendApi";
 import { useNavigate } from "react-router-dom";
@@ -142,6 +141,7 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ location }) => {
         label="Event name"
         name="eventName"
         formData={formData}
+        placeholder="Casual football match"
         handleInputChange={handleInputChange}
       />
 
@@ -149,6 +149,7 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ location }) => {
         label="Description"
         name="description"
         formData={formData}
+        placeholder="Playing football in a good company"
         handleInputChange={handleInputChange}
       />
 
@@ -191,6 +192,7 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ location }) => {
         placeholder="Max participants"
         min={2}
         max={50}
+        label="Max number of participants"
       />
 
       <DropdownSelect
@@ -205,16 +207,8 @@ const CreateEventForm: React.FC<CreateEventFormProps> = ({ location }) => {
         name="requiredExperience"
         value={formData.requiredExperience}
         options={experienceOptions}
-        label="Experience"
+        label="Skill level"
         handleInputChange={handleInputChange}
-      />
-
-      <CheckboxField
-        label="Is public"
-        id="isPublic"
-        name="isPublic"
-        checked={formData.isPublic}
-        onChange={handleInputChange}
       />
 
       <button type="submit" className="submit-button">

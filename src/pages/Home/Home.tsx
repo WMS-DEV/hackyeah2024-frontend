@@ -66,6 +66,16 @@ const Home = () => {
     joinEvent(1, event.id);
   };
 
+  const title = (val: string) => {
+    if (val.length <= 0) {
+      return "";
+    }
+    if (val.length === 1) {
+      return val.toUpperCase();
+    }
+    return val[0].toUpperCase() + val.substring(1).toLowerCase();
+  }
+
   return (
     <div className="home">
       <div className="home__header">{event.name}</div>
@@ -91,12 +101,12 @@ const Home = () => {
           <div className="home__row">
             <TextInfoBox
               label="Experience/skill"
-              value={event.requiredExperience}
+              value={title(event.requiredExperience)}
             />
-            <AccentTextInfoBox label="Calories" value={`${event.calories}`} />
+            <AccentTextInfoBox label="Calories burnt" value={`${event.calories}`} />
           </div>
           <div className="home__row">
-            <TextInfoBox label="Adults/children/all" value={event.age} />
+            <TextInfoBox label="Age group" value={title(event.age)} />
           </div>
         </div>
 
