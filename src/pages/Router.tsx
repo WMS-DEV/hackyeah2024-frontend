@@ -6,6 +6,7 @@ import { EventsLayout } from '../providers/EventsProvider/EventsLayout';
 import { getTokenInfo } from '../api/proxyApi';
 import IncomingEvents from '../components/IncominEvents/IncomingEvents';
 import CreateEvent from './CreateEvent/CreateEvent';
+import Profile from './Profile/Profile';
 
 const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
   new Promise((res, rej) => {
@@ -51,6 +52,7 @@ const router = createBrowserRouter(
         >
           <Route path="/map" element={<IncomingEvents />}></Route>
           <Route path="/create" element={<CreateEvent />}></Route>
+          <Route path="/profile" element={<Profile />}></Route>
         </Route>
       </Route>
     </Route>
