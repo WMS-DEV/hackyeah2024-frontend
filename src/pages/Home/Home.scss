@@ -43,7 +43,7 @@
 
     &__columns {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 50% 50%;
       width: 100%;
     }
   }
@@ -71,6 +71,13 @@
       color: $accent;
       font-size: 1.2rem;
       margin: auto;
+      cursor: pointer;
+
+      &--disabled {
+        cursor: default;
+        background-color: $accent;
+        color: black;
+      }
 
       &:hover {
         background-color: $accent;

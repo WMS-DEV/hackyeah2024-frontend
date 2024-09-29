@@ -4,8 +4,8 @@ import { EventInfo } from "../../providers/EventsProvider/EventsProvider";
 import { useSlider } from "../../providers/SliderProvider/SliderProvider";
 import { TextInfoBox, AccentTextInfoBox } from "./TextInfoBox";
 import "./Home.scss";
-import { joinEvent } from "../../api/backendApi";
-import { useLocation } from "react-router-dom";
+import { getUserId, joinEvent } from "../../api/backendApi";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const { addEventClickListener, removeEventClickListener, selectedEvent } =
@@ -13,6 +13,8 @@ const Home = () => {
   const [event, setEvent] = useState<EventInfo | null>(null);
   const { setVisibility } = useSlider();
   const location = useLocation();
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setVisibility(true);
@@ -62,8 +64,17 @@ const Home = () => {
     return `${day}-${month}-${date.getFullYear()} - ${hours}:${minutes}`;
   };
 
-  const handleJoin = (event: EventInfo) => {
-    joinEvent(1, event.id);
+  const handleJoin = async (event: EventInfo) => {
+    if (!isEventAlreadyJoined(event)) {
+      await joinEvent(1, event.id);
+      navigate("/calendar");
+    }
+  };
+
+  const isEventAlreadyJoined = (event: EventInfo) => {
+    return event.participants.find((part) => part.id === getUserId())
+      ? true
+      : false;
   };
 
   return (
@@ -104,8 +115,13 @@ const Home = () => {
       </div>
 
       <div className="home__signup">
-        <div className="home__signup__button" onClick={() => handleJoin(event)}>
-          Join
+        <div
+          className={`home__signup__button ${
+            isEventAlreadyJoined(event) ? "home__signup__button--disabled" : ""
+          }`}
+          onClick={() => handleJoin(event)}
+        >
+          {isEventAlreadyJoined(event) ? "Already joined" : "Join"}
         </div>
       </div>
     </div>

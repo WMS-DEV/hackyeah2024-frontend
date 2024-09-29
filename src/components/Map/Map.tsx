@@ -44,6 +44,7 @@ const EventsMap = (props: { geolocation: Location }) => {
           defaultCenter={
             selectedEvent ? selectedEvent.location : props.geolocation
           }
+          streetViewControl
           defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
