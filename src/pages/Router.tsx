@@ -14,6 +14,8 @@ import { EventsLayout } from "../providers/EventsProvider/EventsLayout";
 import { getTokenInfo } from "../api/proxyApi";
 import { SliderLayout } from "../providers/SliderProvider/SliderLayout";
 import Home from "./Home/Home";
+import { getEvents } from "../api/backendApi";
+import { EventCategory } from "../providers/EventsProvider/EventsProvider";
 
 const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
   new Promise((res, rej) => {
@@ -29,6 +31,20 @@ const getUserData = () => {
   return {
     userData: getTokenInfo(),
   };
+};
+
+const fetchEvents = async () => {
+  const events = await getEvents();
+  return events.map((eventResponse) => ({
+    ...eventResponse,
+    id: eventResponse.id,
+    location: {
+      lng: eventResponse.longitude,
+      lat: eventResponse.latitude,
+    },
+    name: eventResponse.name,
+    category: eventResponse.category.name as EventCategory,
+  }));
 };
 
 const router = createBrowserRouter(
@@ -52,6 +68,7 @@ const router = createBrowserRouter(
             loader={() => {
               return defer({
                 geolocation: getUserLocation(),
+                events: fetchEvents(),
               });
             }}
             errorElement={<div>Error</div>}

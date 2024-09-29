@@ -1,0 +1,28 @@
+@import "@/variables.scss";
+
+.textinfobox {
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+
+  &__label {
+    font-size: 1.2rem;
+    color: $secondary;
+    font-size: 0.9rem;
+    font-weight: 500;
+
+    &--accent {
+      color: $accent;
+    }
+  }
+
+  &__value {
+    font-size: 1rem;
+
+    &--accent {
+      color: $accent;
+      font-weight: bold;
+    }
+  }
+}

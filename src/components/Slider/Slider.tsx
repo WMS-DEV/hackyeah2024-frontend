@@ -71,42 +71,40 @@ const Slider: FC<SliderProps> = ({ children }) => {
 
   return (
     <AnimatePresence>
-      {true && (
-        <motion.div
-          className="slider"
-          initial={
-            isMobile
-              ? sliderVariants.mobile.hidden
-              : sliderVariants.desctop.hidden
-          }
-          animate={
-            isMobile
-              ? sliderVariants.mobile.visible
-              : sliderVariants.desctop.visible
-          }
-          exit={
-            isMobile ? sliderVariants.mobile.exit : sliderVariants.desctop.exit
-          }
-          transition={{ duration: 0.5 }}
-        >
-          <div className="slider__wrapper" onClick={handleClose}>
-            {isMobile && <div className="slider__close-button" />}
-            <AnimatePresence>
-              <motion.div
-                className="slider__content"
-                initial="hidden"
-                animate={isShown ? "visible" : undefined}
-                exit="exit"
-                variants={contentVariants}
-                transition={{ duration: 0.3 }}
-              >
-                {children}
-              </motion.div>
-            </AnimatePresence>
-            <Navbar />
-          </div>
-        </motion.div>
-      )}
+      <motion.div
+        className="slider"
+        initial={
+          isMobile
+            ? sliderVariants.mobile.hidden
+            : sliderVariants.desctop.hidden
+        }
+        animate={
+          isMobile
+            ? sliderVariants.mobile.visible
+            : sliderVariants.desctop.visible
+        }
+        exit={
+          isMobile ? sliderVariants.mobile.exit : sliderVariants.desctop.exit
+        }
+        transition={{ duration: 0.5 }}
+      >
+        <div className="slider__wrapper" onClick={handleClose}>
+          {isMobile && <div className="slider__close-button" />}
+          <AnimatePresence>
+            <motion.div
+              className="slider__content"
+              initial="hidden"
+              animate={isShown ? "visible" : undefined}
+              exit="exit"
+              variants={contentVariants}
+              transition={{ duration: 0.3 }}
+            >
+              {children}
+            </motion.div>
+          </AnimatePresence>
+          <Navbar />
+        </div>
+      </motion.div>
     </AnimatePresence>
   );
 };

@@ -23,7 +23,6 @@ const EventsMap = (props: { geolocation: Location }) => {
   } = useMap();
 
   const handleLocationClick = (event: MapMouseEvent) => {
-    console.log(event);
     if (event.detail.latLng) {
       setLastClickedLocation(event.detail.latLng);
       locationClickListeners.forEach((listener) => {
@@ -33,7 +32,6 @@ const EventsMap = (props: { geolocation: Location }) => {
   };
 
   const handleEventClick = (event: EventInfo) => {
-    console.log(event);
     if (event) {
       setLastClickedLocation(event.location);
       eventClickListeners.forEach((listener) => {
@@ -49,7 +47,7 @@ const EventsMap = (props: { geolocation: Location }) => {
           mapId="defaultMap"
           style={{ width: "100vw", height: "100vh" }}
           defaultCenter={props.geolocation}
-          defaultZoom={12}
+          defaultZoom={15}
           gestureHandling={"greedy"}
           disableDefaultUI={true}
           colorScheme={ColorScheme.DARK}
@@ -71,7 +69,5 @@ const EventsMap = (props: { geolocation: Location }) => {
     </div>
   );
 };
-
-// <EventMarkers events={events} onClicks={handleEventClick} />
 
 export default EventsMap;
