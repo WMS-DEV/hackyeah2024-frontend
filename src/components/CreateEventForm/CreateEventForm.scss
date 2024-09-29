@@ -3,12 +3,11 @@
 form {
     background-color: $primary;
     overflow-y: scroll;
-    padding: 20px;
-    padding-top: 75px;
+    padding: 0 20px 20px;
     border-radius: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 
     div {
