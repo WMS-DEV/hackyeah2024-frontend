@@ -7,6 +7,8 @@ import Slider from '../../components/Slider/Slider';
 import { MapProvider } from '../MapProvider/MapProvider';
 import { Location } from '../MapProvider/MapProvider';
 import Logo from '../../components/Logo/Logo';
+import '../../components/Spinner/Spinner';
+import Spinner from '../../components/Spinner/Spinner';
 
 export const EventsLayout = () => {
     const outlet = useOutlet();
@@ -16,9 +18,12 @@ export const EventsLayout = () => {
     };
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
             <Await
-                resolve={Promise.all([geolocation, events])}
+                resolve={Promise.all([
+                    geolocation,
+                    events,
+                ])}
                 children={([geolocation, events]) => {
                     return (
                         <EventsProvider initialEvents={events}>
