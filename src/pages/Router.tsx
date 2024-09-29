@@ -11,6 +11,7 @@ import { SliderLayout } from '../providers/SliderProvider/SliderLayout';
 import Home from './Home/Home';
 import { getEvents } from '../api/backendApi';
 import { EventCategory } from '../providers/EventsProvider/EventsProvider';
+import Achievements from './Profile/Achievements/Achievements';
 
 const getUserLocation = (): Promise<{ lat: number; lng: number }> =>
     new Promise((res, rej) => {
@@ -71,7 +72,10 @@ const router = createBrowserRouter(
                         <Route path="/calendar" element={<IncomingEvents />}></Route>
                         <Route path="/home" element={<Home />}></Route>
                         <Route path="/create" element={<CreateEvent />}></Route>
-                        <Route path="/profile" element={<Profile />}></Route>
+                        <Route path="/profile">
+                            <Route path="/profile" element={<Profile />} />
+                            <Route path="/profile/achievements" element={<Achievements />} />
+                        </Route>
                     </Route>
                 </Route>
             </Route>
