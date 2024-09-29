@@ -23,8 +23,8 @@ export interface MapContext {
   removeEventClickListener: (key: string) => void;
   locationClickListeners: Array<LocationClickListener>;
   eventClickListeners: Array<EventClickListener>;
-  lastClickedEventLocation: Location | null;
-  setLastClickedEventLocation: (loc: Location) => void;
+  selectedEvent: EventInfo | null;
+  setSelectedEvent: (event: EventInfo) => void;
 }
 
 export const MapContext = createContext<MapContext>({
@@ -34,8 +34,8 @@ export const MapContext = createContext<MapContext>({
   eventClickListeners: [],
   removeEventClickListener: () => {},
   removeLocationClickListener: () => {},
-  lastClickedEventLocation: null,
-  setLastClickedEventLocation: () => {},
+  selectedEvent: null,
+  setSelectedEvent: () => {},
 });
 
 export const MapProvider = (props: { children: ReactNode }) => {
@@ -47,8 +47,7 @@ export const MapProvider = (props: { children: ReactNode }) => {
     Array<LocationClickListener>
   >([]);
 
-  const [lastClickedEventLocation, setLastClickedEventLocation] =
-    useState<Location | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<EventInfo | null>(null);
 
   const addEventClickListener = (listener: EventClickListener) => {
     setEventClickListeners((listeners) => [...listeners, listener]);
@@ -79,8 +78,8 @@ export const MapProvider = (props: { children: ReactNode }) => {
         eventClickListeners,
         removeLocationClickListener,
         removeEventClickListener,
-        lastClickedEventLocation,
-        setLastClickedEventLocation,
+        selectedEvent,
+        setSelectedEvent,
       }}
     >
       {props.children}

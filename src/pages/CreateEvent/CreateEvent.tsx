@@ -14,7 +14,7 @@ type LatLng = {
 };
 
 const App = () => {
-  const { addLocationClickListener } = useMap();
+  const { addLocationClickListener, addEventClickListener } = useMap();
 
   const createDraftEvent = (location: LatLng): EventInfo => ({
     id: -1,
@@ -58,9 +58,20 @@ const App = () => {
       setEvents([...events, createDraftEvent(location)]);
     };
 
+    const handleEventLocationClick = (event: EventInfo) => {
+      setLocation(event.location);
+      setVisibility(true);
+      setEvents([...events, createDraftEvent(event.location)]);
+    };
+
     addLocationClickListener({
       key: "listenForUpdates",
       listener: handleLocationClick,
+    });
+
+    addEventClickListener({
+      key: "listenForUpdates",
+      listener: handleEventLocationClick,
     });
   }, []);
 
