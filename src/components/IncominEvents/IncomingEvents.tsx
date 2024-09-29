@@ -4,6 +4,9 @@ import EventCard from '../EventCard/EventCard';
 import { EventProps } from '../../types/eventType';
 import './IncomingEvents.style.scss';
 import Loader from '../Loader/Loader';
+import { useMap } from '../../providers/MapProvider/MapProvider';
+import { useNavigate } from 'react-router-dom';
+import { EventInfo } from '../../providers/EventsProvider/EventsProvider';
 
 const eventAxios = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
@@ -15,6 +18,8 @@ const eventAxios = axios.create({
 const IncomingEvents = () => {
     const [events, setEvents] = useState<EventProps[]>([]);
     const [loading, setLoading] = useState(true);
+    const { addEventClickListener } = useMap();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchEvents = async () => {
@@ -29,6 +34,22 @@ const IncomingEvents = () => {
         };
 
         fetchEvents();
+
+        const handleSelectedEvent = (event: EventInfo) => {
+            navigate(`/home?eventId=${event.id}`);
+        };
+
+        addEventClickListener({
+            key: 'homeEventListener',
+            listener: handleSelectedEvent,
+        });
+
+        return () => {
+            addEventClickListener({
+                key: 'homeEventListener',
+                listener: handleSelectedEvent,
+            });
+        };
     }, []);
 
     if (loading) {

@@ -10,6 +10,7 @@ import GolfIcon from '../../assets/icon_golf.png';
 import GymIcon from '../../assets/icon_gym.png';
 
 import './EventCard.style.scss';
+import { useNavigate } from 'react-router-dom';
 
 const eventCategoryToIcon: { [key: string]: string } = {
     Volleyball: VolleyballIcon,
@@ -23,7 +24,12 @@ const eventCategoryToIcon: { [key: string]: string } = {
 };
 
 const EventCard: FC<EventProps> = (props) => {
-    const { name, startTime, endTime, createdBy } = props;
+    const { name, startTime, endTime, category } = props;
+    const navigate = useNavigate();
+
+    const handleNavigate = () => {
+        navigate(`/home?eventId=${props.id}`);
+    };
 
     const formatTime = (timestamp: number) => {
         const date = new Date(timestamp);
@@ -33,11 +39,11 @@ const EventCard: FC<EventProps> = (props) => {
     const categoryIcon = eventCategoryToIcon[category.name] || eventCategoryToIcon.Gym;
 
     return (
-        <div className="event-card">
+        <div className="event-card" onClick={() => handleNavigate()}>
             <div className="event-card__wrapper">
                 <div className="event-card__header">
                     <h3 className="event-card__title">{name}</h3>
-                    {createdBy && <p className="event-card__edit">Edit</p>}
+                    {/* {createdBy && <p className="event-card__edit">Edit</p>} */}
                 </div>
                 <div className="event-card__content">
                     <div className="event-card__time-wrapper">

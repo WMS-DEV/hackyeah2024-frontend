@@ -2,6 +2,11 @@ import { EventCategory, EventInfo } from '../../providers/EventsProvider/EventsP
 import VolleyballIcon from '../../assets/icon_volleyball.png';
 import BasketballIcon from '../../assets/icon_basketball.png';
 import SoccerIcon from '../../assets/icon_soccer.png';
+import BaseballIcon from '../../assets/icon_baseball.png';
+import FootballIcon from '../../assets/icon_football.png';
+import TennisIcon from '../../assets/icon_table_tennis.png';
+import GolfIcon from '../../assets/icon_golf.png';
+import GymIcon from '../../assets/icon_gym.png';
 
 interface PinProps {
     event: EventInfo;
@@ -11,13 +16,18 @@ interface PinProps {
 export const eventCategoryToIcon: {
     [key in EventCategory]: string;
 } = {
-    Soccer: SoccerIcon,
     Volleyball: VolleyballIcon,
     Basketball: BasketballIcon,
+    Soccer: SoccerIcon,
+    Baseball: BaseballIcon,
+    Football: FootballIcon,
+    Tennis: TennisIcon,
+    Golf: GolfIcon,
+    Gym: GymIcon,
 };
 
 export const Pin = ({ onClick, event }: PinProps) => {
-    const icon = eventCategoryToIcon[event.category];
+    const icon = eventCategoryToIcon[event.category] || eventCategoryToIcon.Gym;
 
     const handleClick = () => {
         if (onClick) {
