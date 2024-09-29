@@ -1,100 +1,98 @@
-@import "@/variables.scss";
+@import '@/variables.scss';
 
 .login-panel {
-  background-color: $secondary;
-  margin: auto;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-  border-radius: 20px;
-  border-color: $accent;
-  border-width: 2px;
-  border-style: solid;
-
-  @media (max-width: $md) {
-    width: auto;
-  }
-
-  @media (min-width: $md) {
-    min-width: 400px;
-  }
-
-  &__header {
-    font-size: 3rem;
-    font-weight: 500;
-    color: white;
-    margin-top: 1rem;
+    background-color: black;
+    margin: auto;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    border-radius: 20px;
+    border-color: $accent;
+    border-width: 2px;
+    border-style: solid;
 
     @media (max-width: $md) {
-      font-size: 2rem;
+        width: auto;
     }
 
     @media (min-width: $md) {
-      font-size: 2.3rem;
-    }
-  }
-
-  &__body {
-    padding: 1rem;
-    height: 100%;
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    :hover {
-      border-color: $accent;
+        min-width: 400px;
     }
 
-    &__subtitle {
-      font-size: 2rem;
-      font-weight: 400;
-      color: white;
-      margin-top: 1rem;
-      padding: 1rem;
+    &__header {
+        font-size: 3rem;
+        font-weight: 500;
+        color: white;
+        margin-top: 1rem;
 
-      @media (max-width: $md) {
-        font-size: 1.5rem;
-      }
+        @media (max-width: $md) {
+            font-size: 2rem;
+        }
+
+        @media (min-width: $md) {
+            font-size: 2.3rem;
+        }
     }
 
-    &__button {
-      margin-top: 1rem;
-      width: 80%;
-      border-radius: 40px;
-      font-size: 1.3rem;
-      display: flex;
-      align-items: center;
-      padding: 0px;
-      padding-left: 5%;
-      padding-right: 5%;
-      border-color: black;
-      background-color: $tertiary;
-
-      @media (max-width: $md) {
-        width: 100%;
-      }
-
-      
-
-      &__logo {
-        padding: 0;
-      }
-
-      &__text {
+    &__body {
         padding: 1rem;
+        height: 100%;
+        display: flex;
         width: 100%;
-      }
-    }
-  }
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
-  &__sportly-logo {
-    width: 15rem;
-    height: 15rem;
-    margin-top: 1rem;
-  }
+        :hover {
+            border-color: $accent;
+        }
+
+        &__subtitle {
+            font-size: 2rem;
+            font-weight: 400;
+            color: white;
+            margin-top: 1rem;
+            padding: 1rem;
+
+            @media (max-width: $md) {
+                font-size: 1.5rem;
+            }
+        }
+
+        &__button {
+            margin-top: 1rem;
+            width: 80%;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            padding: 0px;
+            padding-left: 5%;
+            padding-right: 5%;
+            border-color: black;
+            background-color: $tertiary;
+
+            @media (max-width: $md) {
+                width: 100%;
+            }
+
+            &__logo {
+                padding: 0;
+            }
+
+            &__text {
+                padding: 1rem;
+                width: 100%;
+            }
+        }
+    }
+
+    &__sportly-logo {
+        width: 15rem;
+        height: 15rem;
+        margin-top: 1rem;
+    }
 }
