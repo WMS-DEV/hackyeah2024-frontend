@@ -88,8 +88,10 @@ const Slider: FC<SliderProps> = ({ children }) => {
         }
         transition={{ duration: 0.5 }}
       >
-        <div className="slider__wrapper" onClick={handleClose}>
-          {isMobile && <div className="slider__close-button" />}
+        <div className="slider__wrapper">
+          {isMobile && (
+            <div className="slider__close-button" onClick={handleClose} />
+          )}
           <AnimatePresence>
             <motion.div
               className="slider__content"

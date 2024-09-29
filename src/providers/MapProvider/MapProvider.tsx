@@ -1,10 +1,4 @@
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { ReactNode, createContext, useContext, useState } from "react";
 import { EventInfo } from "../EventsProvider/EventsProvider";
 
 export interface Location {
@@ -29,8 +23,8 @@ export interface MapContext {
   removeEventClickListener: (key: string) => void;
   locationClickListeners: Array<LocationClickListener>;
   eventClickListeners: Array<EventClickListener>;
-  lastClickedLocation: Location | null;
-  setLastClickedLocation: (loc: Location) => void;
+  lastClickedEventLocation: Location | null;
+  setLastClickedEventLocation: (loc: Location) => void;
 }
 
 export const MapContext = createContext<MapContext>({
@@ -40,8 +34,8 @@ export const MapContext = createContext<MapContext>({
   eventClickListeners: [],
   removeEventClickListener: () => {},
   removeLocationClickListener: () => {},
-  lastClickedLocation: null,
-  setLastClickedLocation: () => {},
+  lastClickedEventLocation: null,
+  setLastClickedEventLocation: () => {},
 });
 
 export const MapProvider = (props: { children: ReactNode }) => {
@@ -53,11 +47,10 @@ export const MapProvider = (props: { children: ReactNode }) => {
     Array<LocationClickListener>
   >([]);
 
-  const [lastClickedLocation, setLastClickedLocation] =
+  const [lastClickedEventLocation, setLastClickedEventLocation] =
     useState<Location | null>(null);
 
   const addEventClickListener = (listener: EventClickListener) => {
-    console.log("Added listener");
     setEventClickListeners((listeners) => [...listeners, listener]);
   };
 
@@ -77,10 +70,6 @@ export const MapProvider = (props: { children: ReactNode }) => {
     );
   };
 
-  useEffect(() => {
-    console.log(eventClickListeners);
-  }, [eventClickListeners]);
-
   return (
     <MapContext.Provider
       value={{
@@ -90,8 +79,8 @@ export const MapProvider = (props: { children: ReactNode }) => {
         eventClickListeners,
         removeLocationClickListener,
         removeEventClickListener,
-        lastClickedLocation,
-        setLastClickedLocation,
+        lastClickedEventLocation,
+        setLastClickedEventLocation,
       }}
     >
       {props.children}

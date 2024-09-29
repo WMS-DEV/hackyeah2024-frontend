@@ -6,12 +6,15 @@ import AccountIcon from "../../icons/AccountIcon";
 import AddIcon from "../../icons/AddIcon";
 import "./Navbar.scss";
 import "../Button/Button.scss";
+import { useEvents } from "../../providers/EventsProvider/EventsProvider";
 
 const Navbar = () => {
   const currentPage = useLocation().pathname;
   const navigate = useNavigate();
+  const { removeDrafts } = useEvents();
 
   const handleNavButtonClick = (path: string) => {
+    removeDrafts();
     navigate(path);
   };
 

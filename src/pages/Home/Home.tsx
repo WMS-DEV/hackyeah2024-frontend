@@ -8,15 +8,20 @@ import { useSlider } from "../../providers/SliderProvider/SliderProvider";
 import { TextInfoBox, AccentTextInfoBox } from "./TextInfoBox";
 import "./Home.scss";
 import { joinEvent } from "../../api/backendApi";
-import { useSearchParams } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 
 const Home = () => {
-  const { addEventClickListener } = useMap();
+  const { addEventClickListener, removeEventClickListener } = useMap();
   const [event, setEvent] = useState<EventInfo | null>(null);
   const { setVisibility } = useSlider();
   const { events } = useEvents();
+  const location = useLocation();
 
   const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    setVisibility(false);
+  }, [location]);
 
   useEffect(() => {
     const handleSelectedEvent = (event: EventInfo) => {
@@ -37,10 +42,16 @@ const Home = () => {
       key: "homeEventListener",
       listener: handleSelectedEvent,
     });
+
+    return () => {
+      removeEventClickListener("homeEventListener");
+    };
   }, []);
 
   if (!event) {
-    return <div />;
+    return (
+      <div className="home__empty"> Pick an event to view its details </div>
+    );
   }
 
   const getNumberOfParticipants = (event: EventInfo) => {
