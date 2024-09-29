@@ -7,7 +7,7 @@ import { useMap } from "../../providers/MapProvider/MapProvider";
 import { useNavigate } from "react-router-dom";
 import { EventInfo } from "../../providers/EventsProvider/EventsProvider";
 import { useSlider } from "../../providers/SliderProvider/SliderProvider";
-import { getEvents } from "../../api/backendApi";
+import { getEvents, getUserId } from "../../api/backendApi";
 
 const IncomingEvents = () => {
   const [events, setEvents] = useState<EventProps[]>([]);
@@ -38,7 +38,13 @@ const IncomingEvents = () => {
     const fetchEvents = async () => {
       try {
         const events = await getEvents();
-        setEvents(events);
+        setEvents(
+          events.filter(
+            (event) =>
+              event.participants.filter((part) => part.id === getUserId())
+                .length,
+          ),
+        );
         setLoading(false);
       } catch (error) {
         console.error("Error fetching events:", error);

@@ -9,6 +9,10 @@ export const backendAxios = axios.create({
   },
 });
 
+export const getUserId = () => {
+  return 1;
+};
+
 export interface EventData {
   name: string;
   categoryId: number;
