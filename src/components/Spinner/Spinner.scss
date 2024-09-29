@@ -1,0 +1,50 @@
+@import "@/variables.scss";
+
+.image-container {
+  width: 100vw;
+  height: 100vh;
+  background-size: 50%;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 auto;
+  animation: spin 2s infinite ease-in-out, changeImage 6s infinite;
+}
+
+@keyframes spin {
+    0% {
+      transform: rotate(0deg) scale(0.15);
+    }
+    20% {
+        transform: rotate(360deg) scale(1);
+    }
+    75% {
+      transform: rotate(360deg);
+    }
+    100% {
+      transform: rotate(720deg) scale(0.15);
+    }
+  }
+
+  @keyframes changeImage {
+    0% {
+      background-image: url('../../assets/icon_soccer.png');
+    }
+    30% {
+      background-image: url('../../assets/icon_soccer.png'); /* Ten sam obraz utrzymuje się do 30% */
+    }
+    33.33% {
+      background-image: url('../../assets/icon_gym.png');
+    }
+    63.33% {
+      background-image: url('../../assets/icon_gym.png'); /* Drugi obraz utrzymuje się do 63% */
+    }
+    66.66% {
+      background-image: url('../../assets/icon_baseball.png');
+    }
+    96.66% {
+      background-image: url('../../assets/icon_baseball.png'); /* Trzeci obraz utrzymuje się do 96% */
+    }
+    100% {
+      background-image: url('../../assets/icon_soccer.png'); /* Powrót do pierwszego obrazu */
+    }
+  }
