@@ -1,125 +1,66 @@
-@import "@/variables.scss";
+@import '@/variables.scss';
 
-form {
-    background-color: $primary;
-    overflow-y: scroll;
-    padding: 0 20px 20px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
+.form {
+    overflow-x: hidden;
+    width: 100%;
 
-    div {
-        margin-bottom: 15px;
-        background-color: $primary;
-    }
-
-    label {
-        display: block;
-        font-size: 0.9rem;
-        font-weight: 500;
-        margin-bottom: 5px;
-        color: $secondary;
+    &__header {
+        display: flex;
+        flex-direction: column;
         width: 100%;
-    }
+        padding: 1rem;
 
-    input[type="text"],
-    input[type="number"],
-    input[type="date"],
-    input[type="time"],
-    input[type="datetime-local"],
-    select {
-        width: 100%;
-        padding: 10px;
-        font-size: 1rem;
-        border: 1px solid $accent;
-        border-radius: 12px;
-        box-sizing: border-box;
-        background-color: transparent;
+        &--title {
+            font-size: 30px;
+            color: $white;
+            margin: 0;
+        }
 
-        :hover, :focus, :active {
-            border-color: $accent-light;
+        &--line {
+            display: block;
+            border-radius: 20px;
+            width: 80px;
+            height: 2px;
+            background-color: $accent;
+            z-index: 100;
         }
     }
 
-    select {
-        background-image: url('/assets/arrow_down.svg');
-        background-position: right center 50px;
+    &__wrapper {
+        display: flex;
+        flex-direction: column;
+        width: 95%;
+        padding: 1rem;
+        gap: 1rem;
     }
 
-    input[type="checkbox"] {
-        margin-right: 10px;
-    }
-
-    button {
+    &__time-wrapper {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         width: 100%;
-        padding: 10px;
-        background-color: #007bff;
-        color: white;
-        font-size: 1rem;
-        border: none;
-        border-radius: 4px;
+        gap: 1.5rem;
+        overflow-y: hidden;
+
+        @media (max-width: 600px) {
+            flex-direction: column;
+        }
+    }
+
+    &__btn {
+        width: 100%;
+        padding: 2rem;
+        color: $white;
+        font-size: 15px;
+        font-weight: bold;
+        border: 2px solid $accent;
+        border-radius: 20px;
         cursor: pointer;
         transition: background-color 0.3s ease;
+
+        &:hover {
+            background-color: $accent;
+            border: 2px solid $accent;
+        }
     }
-}
-
-.select-wrapper {
-    position: relative;
-    display: inline-block;
-    margin: auto;
-    width: 100%;
-}
-
-.custom-select {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    border: 1px solid $accent;
-    // padding: 10px 30px 10px 10px;
-    font-size: 16px;
-    width: 100%;
-}
-
-.select-icon {
-    position: absolute;
-    right: 10px;
-    top: 75%;
-    transform: translateY(-50%);
-    pointer-events: none;
-
-    svg {
-        width: 24px;
-        height: 24px;
-    }
-}
-
-.input-label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 15px;
-    color: $secondary;
-    width: 100%;
-}
-
-.submit-button {
-    background-color: transparent;
-    border: 1px solid $accent;
-    border-radius: 15px;
-}
-
-form>h2 {
-    color: white;
-    border-bottom: 5px solid $accent;
-    width: auto;
-    text-align: left;
-    margin-right: auto;
-    margin-left: 0px;
-}
-
-form>button:hover {
-    background-color: transparent;
-    border-color: $accent;
 }
